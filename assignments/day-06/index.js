@@ -1,28 +1,24 @@
-/**
- * 1. Simple Store
- */
-function createStore(initialState) {
-  // TODO: Implement listeners array, getState, setState, subscribe
-  return {
-    getState: () => {},
-    setState: (newState) => {},
-    subscribe: (listener) => {
-      /* return unsubscribe fn */
-    },
-  };
-}
+const MiniReact = (function () {
+  let hooks = [];
+  let idx = 0;
 
-/**
- * 2. History Store (Undo/Redo)
- * Can wrap createStore or implement from scratch.
- */
-function createHistoryStore(initialState) {
-  // TODO: Implement
-  return {
-    // ...store methods
-    undo: () => {},
-    redo: () => {},
-  };
-}
+  function useState(initialValue) {
+    // TODO: Implement
+    // 1. Get current state or Init
+    // 2. Create setter (setState)
+    // 3. Move idx++
+    // 4. Return [val, set]
+    throw new Error("Not implemented");
+  }
 
-module.exports = { createStore, createHistoryStore };
+  function render(Component) {
+    idx = 0; // Reset index for next render
+    const c = Component();
+    c.render();
+    return c;
+  }
+
+  return { useState, render };
+})();
+
+module.exports = MiniReact;

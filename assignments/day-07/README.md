@@ -1,41 +1,27 @@
-# ☢️ Day 7: The Reactive Core (Signals)
+# ☢️ Day 7: The Effect Loop (useEffect)
 
-> "Warning: Core temperature rising. If the cooling pumps don't auto-activate, we melt down."
+> "The Reactor needs to synchronize. When the Core gets hot, the cooling fans MUST spin up. But don't spin them up if the Core is already steady."
 
 ## 📚 Mission Briefing
 
-You are designing the safety systems for a Nuclear Power Plant.
+You are implementing `useEffect`.
 
-- **The Problem**: Manual checks are too slow. If `temperature` rises, `coolingSystems` MUST update automatically.
-- **The Solution**: **Fine-Grained Reactivity (Signals)**.
+- **The Problem**: Side effects (Data fetching, timers, subscriptions) need to happen _after_ render.
+- **The Constraint**: They should only re-run if their **Dependency Array** changes.
 
 ## 🛠️ Your Objectives
 
-### 1. `signal(temp)`
+### 1. `useEffect(callback, depArray)`
 
-Create a reactive atom.
+- **Mount**: Run callback.
+- **Update**: Compare `depArray` with `oldDepArray`. If different, run callback.
+- **No Array**: If `depArray` is undefined, run EVERY time.
 
-- When `temp` changes, it screams "I CHANGED!" to anyone listening.
+### 2. Cleanup Function
 
-### 2. `effect(fn)`
+- **Unmount/Re-run**: If the callback returned a function (`return () => unsub()`), you MUST call it before running the new effect. (Prevent memory leaks!).
 
-The Safety Monitor.
-
-- `effect(() => if (temp() > 100) alarm())`.
-- This function must **automatically subcribe** to `temp`. You don't tell it to. It just _knows_.
-
-### 3. `computed(fn)`
-
-Derived metrics.
-
-- `const dangerLevel = computed(() => temp() * pressure())`.
-- If `temp` changes, `dangerLevel` updates instantly.
-
-## 🧠 Mental Model
-
-This is how SolidJS, Preact Signals, and Vue work. It's the "Magic" without the VDOM diffing.
-
-## 🧪 Safety Drill
+## 🧪 Reactor Test
 
 ```bash
 npm run test:day7

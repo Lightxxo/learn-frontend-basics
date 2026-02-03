@@ -1,35 +1,45 @@
-const { createStore, createHistoryStore } = require("./index");
+const MiniReact = require("./index");
 
-describe("⏳ Day 6: The Time Machine", () => {
-  describe("Module 1: The Timeline (Store)", () => {
-    test("should notify the Temporal Agency when timeline changes", () => {
-      const chronos = createStore({ year: 1985 });
-      const agency = jest.fn();
+describe("⏳ Day 6: The Temporal Engine (useState)", () => {
+  test("should hold state between renders", () => {
+    function Counter() {
+      const [count, setCount] = MiniReact.useState(0);
+      return {
+        render: () => {},
+        click: () => setCount(count + 1),
+        getCount: () => count,
+      };
+    }
 
-      chronos.subscribe(agency);
+    // Mount
+    let app = MiniReact.render(Counter);
+    expect(app.getCount()).toBe(0);
 
-      console.log("    > Jumping to 2015...");
-      chronos.setState({ year: 2015 });
-
-      expect(agency).toHaveBeenCalledWith({ year: 2015 });
-    });
+    // Update
+    app.click();
+    // Re-render simulates React re-running the component
+    app = MiniReact.render(Counter);
+    expect(app.getCount()).toBe(1);
   });
 
-  describe("Module 2: The Paradox Fixer (Undo/Redo)", () => {
-    test("should undo cataclysmic events", () => {
-      const history = createHistoryStore({ status: "Peaceful" });
+  test("should support multiple hooks", () => {
+    function Form() {
+      const [name, setName] = MiniReact.useState("Alice");
+      const [age, setAge] = MiniReact.useState(25);
+      return {
+        render: () => {},
+        changeName: (n) => setName(n),
+        inputs: { name, age },
+      };
+    }
 
-      history.setState({ status: "War" });
-      history.setState({ status: "Apocalypse" });
+    let app = MiniReact.render(Form);
+    expect(app.inputs.name).toBe("Alice");
+    expect(app.inputs.age).toBe(25);
 
-      expect(history.getState()).toEqual({ status: "Apocalypse" });
-
-      console.log("    > [ALERT] undoing apocalypse...");
-      history.undo();
-      expect(history.getState()).toEqual({ status: "War" });
-
-      history.undo();
-      expect(history.getState()).toEqual({ status: "Peaceful" });
-    });
+    app.changeName("Bob");
+    app = MiniReact.render(Form);
+    expect(app.inputs.name).toBe("Bob");
+    expect(app.inputs.age).toBe(25); // Should remain untouched!
   });
 });

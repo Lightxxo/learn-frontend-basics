@@ -1,36 +1,43 @@
-const { signal, effect, computed } = require("./index");
+const MiniReact = require("./index");
 
-describe("☢️ Day 7: Reactor Safety Systems", () => {
-  test("should activate sirens when temperature rises", () => {
-    const [getTemp, setTemp] = signal(100); // 100 degrees
-    const sirens = jest.fn();
+describe("☢️ Day 7: The Reactor (useEffect)", () => {
+  test("should run effect on mount", () => {
+    const sideEffect = jest.fn();
 
-    // The Effect "watches" getTemp
-    effect(() => {
-      if (getTemp() > 200) {
-        sirens();
-      }
-    });
+    function Component() {
+      MiniReact.useEffect(sideEffect, []);
+      return { render: () => {} };
+    }
 
-    expect(sirens).not.toHaveBeenCalled();
-
-    console.log("    > Temp rising to 300...");
-    setTemp(300);
-
-    expect(sirens).toHaveBeenCalled();
-    console.log("    > [SUCCESS] Sirens activated automatically!");
+    MiniReact.render(Component);
+    expect(sideEffect).toHaveBeenCalledTimes(1);
   });
 
-  test("computed levels should sync", () => {
-    const [getCore, setCore] = signal(5);
-    const [getRod, setRod] = signal(2);
+  test("should NOT run effect if deps are stable", () => {
+    const sideEffect = jest.fn();
 
-    // Output = Core * Rod
-    const totalOutput = computed(() => getCore() * getRod());
+    function Component() {
+      const [count, setCount] = MiniReact.useState(0);
+      // Only run when count changes
+      MiniReact.useEffect(sideEffect, [count]);
+      return {
+        render: () => {},
+        click: () => setCount(count + 1),
+        noop: () => setCount(count),
+      };
+    }
 
-    expect(totalOutput()).toBe(10);
+    let app = MiniReact.render(Component);
+    expect(sideEffect).toHaveBeenCalledTimes(1);
 
-    setCore(10);
-    expect(totalOutput()).toBe(20);
+    // Update with NO change
+    app.noop();
+    app = MiniReact.render(Component);
+    expect(sideEffect).toHaveBeenCalledTimes(1); // Should not run again!
+
+    // Update WITH change
+    app.click();
+    app = MiniReact.render(Component);
+    expect(sideEffect).toHaveBeenCalledTimes(2); // Should run
   });
 });

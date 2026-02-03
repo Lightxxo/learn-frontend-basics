@@ -1,32 +1,37 @@
-# 🖼️ Day 5: The Holodeck Renderer (Virtual DOM)
+# 🖼️ Day 5: The Holodeck (Virtual DOM & Reconciliation)
 
-> "Computer, load the simulation. Wait, why is it loading so slowly? Optimize the rendering pipeline!"
+> "The Holodeck is flickering. We need to optimize the projection algorithms. Only update what CHANGED."
 
 ## 📚 Mission Briefing
 
-You are engineering the Holodeck's projection system.
+You are building the Core Rendering Engine.
 
-- **The Problem**: Directly manipulating the matter-stream (Real DOM) is energy expensive.
-- **The Solution**: We build a lightweight hologram (Virtual DOM) first, then project only the changes.
+- **The Problem**: `document.createElement` is slow. Destroying the whole DOM to change one text node is wasteful.
+- **The Solution**: **Reconciliation**. Compare the new blueprint (VDOM) vs the old one, and only touch the real DOM where necessary.
 
 ## 🛠️ Your Objectives
 
-### 1. Operation: `h(tag, props, children)`
+### 1. `h(tag, props, children)`
 
-The Blueprint Generator.
+The Blueprint Generator (Hyperscript).
 
-- `h('droid', { model: 'T-800' }, [])` creates a lightweight instruction object.
+- This is what JSX compiles to.
+- Returns `{ tag, props, children }`.
 
-### 2. Operation: `render(vnode, container)`
+### 2. `render(vnode, container)`
 
-The Projection.
+The Initial Mount.
 
-- Turn those blueprints into real elements.
-- **Crucial**: Handle event listeners (`onClick` -> Fire laser).
+- Turn VDOM into Real DOM.
+- Recursively handle children.
 
-## 💡 Pro Tip
+### 3. `diff(oldVNode, newVNode)` (The Challenge)
 
-In the real world, this is how React works. `JSX` `<div />` compiles down to `h('div')`. You are writing the engine that powers React!
+The Reconciler.
+
+- If nodes are the same tag: Update attributes loops.
+- If nodes are different tags: Replace the whole node.
+- **Text Nodes**: If string changed, update `.nodeValue`.
 
 ## 🧪 Simulation Test
 

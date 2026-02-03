@@ -1,36 +1,27 @@
-/**
- * 1. LRU Cache
- * - Capacity-limited key-value store.
- * - Evicts least recently used item when full.
- */
-class LRUCache {
-  constructor(capacity) {
-    this.capacity = capacity;
-    // Hint: use a Map!
-    this.cache = new Map();
-  }
+const MiniReact = (function () {
+  let hooks = [];
+  let idx = 0;
 
-  get(key) {
+  // ... insert previous hooks (useState/useEffect) if needed,
+  // but for this assignment we focus on useMemo.
+
+  function useMemo(factory, deps) {
     // TODO: Implement
-    // If key exists, return it AND Make it "recent"
-    return -1;
+    // 1. Check previous hook
+    // 2. Compare deps
+    // 3. Return cached or new value
+    idx++;
+    throw new Error("Not implemented");
   }
 
-  put(key, value) {
-    // TODO: Implement
-    // If key exists, update value and make recent.
-    // If key new: add.
-    // If size > capacity: evict oldest.
+  function render(Component) {
+    idx = 0;
+    const c = Component();
+    c.render();
+    return c;
   }
-}
 
-/**
- * 2. Memoize
- * - Caches result of function calls.
- */
-function memoize(fn) {
-  // TODO: Implement
-  throw new Error("Not implemented");
-}
+  return { useMemo, render };
+})();
 
-module.exports = { LRUCache, memoize };
+module.exports = MiniReact;

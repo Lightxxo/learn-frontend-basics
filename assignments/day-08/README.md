@@ -1,29 +1,24 @@
-# 📚 Day 8: The Restricted Library (Performance)
+# 📚 Day 8: The Restricted Library (useMemo)
 
-> "The Forbidden Scrolls take eons to summon. Once read, keep them close. If the bag is full, burn the old ones."
+> "The casting spell is expensive. Do not cast it again unless the winds of magic have shifted."
 
 ## 📚 Mission Briefing
 
-You are the Keeper of the Scrolls in a magical library.
+You are implementing `useMemo`.
 
-- **The Problem**: Summoning a scroll (expensive API call) takes too much mana.
-- **The Solution (Memoize)**: If someone asks for "Fire Spell" again, give them the copy you already have.
-- **The Constraint (LRU)**: Your satchel only holds 3 scrolls. If you pick up a 4th, you must drop the one you haven't used in the longest time.
+- **The Problem**: `const expensive = heavyCalc(prop)` runs on EVERY render.
+- **The Solution**: Cache the result. Only re-calculate if `prop` changes.
 
 ## 🛠️ Your Objectives
 
-### 1. `LRUCache(capacity)`
+### 1. `useMemo(factory, depArray)`
 
-The Satchel.
+- **First Run**: Call factory(), return result, save `[deps, result]`.
+- **Next Run**: Compare deps. If same, return saved result. If different, call factory() again.
 
-- `get(scrollName)`: Return it. **Mark it as fresh**.
-- `put(scrollName, content)`: Add it. If full, **Drop the oldest**.
+### 2. `useCallback(fn, depArray)` (Bonus)
 
-### 2. `memoize(spellCast)`
-
-The Spell Book.
-
-- Wrap a function so that `spellCast("Fireball")` runs once. The next time, it returns the cached explosion instantly.
+- Sugar for `useMemo(() => fn, deps)`. Returns the _function itself_, stable across renders.
 
 ## 🧪 Mana Test
 

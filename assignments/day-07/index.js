@@ -1,43 +1,35 @@
-// Global state for dependency tracking
-let activeEffect = null;
+const MiniReact = (function () {
+  let hooks = [];
+  let idx = 0;
 
-/**
- * 1. Signal
- * Returns [get, set]
- */
-function signal(initialValue) {
-  // TODO: Implement
-  // let value = initialValue;
-  // const subscribers = new Set();
+  function useState(initialValue) {
+    const state = hooks[idx] || initialValue;
+    const _idx = idx; // freeze index for closures
+    const setState = (newVal) => {
+      hooks[_idx] = newVal;
+    };
+    idx++;
+    return [state, setState];
+  }
 
-  // const get = () => { ... track ... return value }
-  // const set = (newVal) => { ... update ... trigger }
+  function useEffect(callback, depArray) {
+    // TODO: Implement
+    // 1. Check if we have old deps at hooks[idx]
+    // 2. Compare old deps vs new deps (Array.every)
+    // 3. If changed (or first run), run callback
+    // 4. Save cleanup function?
+    idx++;
+    throw new Error("Not implemented");
+  }
 
-  // return [get, set];
-  throw new Error("Not implemented");
-}
+  function render(Component) {
+    idx = 0;
+    const c = Component();
+    c.render();
+    return c;
+  }
 
-/**
- * 2. Effect
- * Runs the function and tracks dependencies.
- */
-function effect(fn) {
-  // TODO: Implement
-  // activeEffect = fn;
-  // fn();
-  // activeEffect = null;
-  throw new Error("Not implemented");
-}
+  return { useState, useEffect, render };
+})();
 
-/**
- * 3. Computed (Bonus)
- * Returns a signal that auto-updates.
- */
-function computed(fn) {
-  // TODO: Implement
-  // Create a signal.
-  // Run an effect that updates the signal when deps change.
-  throw new Error("Not implemented");
-}
-
-module.exports = { signal, effect, computed };
+module.exports = MiniReact;

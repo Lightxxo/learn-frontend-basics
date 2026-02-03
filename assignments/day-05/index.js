@@ -2,24 +2,28 @@
  * 1. Hyperscript
  * Returns { tag, props, children }
  */
-function h(tag, props, ...children) {
-  // TODO: Implement
-  // Normalize children: flatten arrays, convert strings/numbers to text nodes if needed?
-  // For simplicity: just keep them as is.
+function h(tag, props, children) {
+  // TODO: formatting
   throw new Error("Not implemented");
 }
 
 /**
  * 2. Render
- * Mounts a VNode to a DOM Element.
+ * Turns VDOM -> RealDOM
  */
 function render(vnode, container) {
-  // TODO: Implement
-  // 1. Check if vnode is string -> TextNode
-  // 2. Element -> createElement
-  // 3. Set props (onClick, id, style)
-  // 4. Append to container
+  // TODO: Create element, set props, append to container
   throw new Error("Not implemented");
+}
+
+/**
+ * 3. Diff (Reconciliation) - BONUS / Advanced
+ * Updates an existing DOM node based on changes
+ */
+function patch(domNode, oldVNode, newVNode) {
+  // TODO: Check if tag changed? Replace.
+  // Check if props changed? Update.
+  // Check children? Recurse.
 }
 
 module.exports = { h, render };
