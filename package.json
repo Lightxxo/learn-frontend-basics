@@ -1,0 +1,32 @@
+{
+  "name": "learn-frontend-basics",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "test:day1": "jest assignments/day-01",
+    "test:day2": "jest assignments/day-02",
+    "test:day3": "jest assignments/day-03",
+    "test:day4": "jest assignments/day-04",
+    "test:day5": "jest assignments/day-05",
+    "test:day6": "jest assignments/day-06",
+    "test:day7": "jest assignments/day-07",
+    "test:day8": "jest assignments/day-08",
+    "test:day9": "jest assignments/day-09",
+    "prepare": "husky install"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@types/jest": "^30.0.0",
+    "husky": "^9.1.7",
+    "jest": "^30.2.0",
+    "jest-environment-jsdom": "^30.2.0",
+    "lint-staged": "^16.2.7",
+    "ts-jest": "^29.4.6",
+    "typescript": "^5.9.3"
+  }
+}
