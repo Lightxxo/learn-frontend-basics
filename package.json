@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
+    "test:changed": "jest -o",
     "test:day1": "jest assignments/day-01",
     "test:day2": "jest assignments/day-02",
     "test:day3": "jest assignments/day-03",
