@@ -39,3 +39,6 @@ Run the compiler checks:
 ```bash
 npm run test:day4
 ```
+
+
+👉 [Read the Submission Guide](../../SUBMISSION_GUIDE.md)

@@ -26,3 +26,6 @@ You are implementing `useEffect`.
 ```bash
 npm run test:day7
 ```
+
+
+👉 [Read the Submission Guide](../../SUBMISSION_GUIDE.md)

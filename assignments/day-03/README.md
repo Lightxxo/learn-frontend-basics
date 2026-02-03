@@ -48,3 +48,6 @@ Initialize docking procedure:
 ```bash
 npm run test:day3
 ```
+
+
+👉 [Read the Submission Guide](../../SUBMISSION_GUIDE.md)

@@ -36,3 +36,6 @@ Create a `MiniReact` module that holds `state` array and `index`.
 ```bash
 npm run test:day6
 ```
+
+
+👉 [Read the Submission Guide](../../SUBMISSION_GUIDE.md)

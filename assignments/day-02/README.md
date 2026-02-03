@@ -41,3 +41,6 @@ Run the genetic sequencer:
 ```bash
 npm run test:day2
 ```
+
+
+👉 [Read the Submission Guide](../../SUBMISSION_GUIDE.md)

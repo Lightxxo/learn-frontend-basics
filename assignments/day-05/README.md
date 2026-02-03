@@ -38,3 +38,6 @@ The Reconciler.
 ```bash
 npm run test:day5
 ```
+
+
+👉 [Read the Submission Guide](../../SUBMISSION_GUIDE.md)

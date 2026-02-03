@@ -50,3 +50,6 @@ npm run test:day1
 ```
 
 _(Check `index.test.js` to see the simulated hacking attempts!)_
+
+
+👉 [Read the Submission Guide](../../SUBMISSION_GUIDE.md)

@@ -37,3 +37,6 @@ Clearance Levels.
 ```bash
 npm run test:day9
 ```
+
+
+👉 [Read the Submission Guide](../../SUBMISSION_GUIDE.md)

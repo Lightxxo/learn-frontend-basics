@@ -25,3 +25,6 @@ You are implementing `useMemo`.
 ```bash
 npm run test:day8
 ```
+
+
+👉 [Read the Submission Guide](../../SUBMISSION_GUIDE.md)
