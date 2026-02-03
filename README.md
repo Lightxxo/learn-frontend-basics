@@ -28,7 +28,7 @@ You won't just learn _how_ to use hooks; you will **implement your own** `useSta
 
 ## 🛠️ The Workflow (Setup Guide)
 
-Since you (likely) don't own this repository, follow this workflow to save your progress.
+Since you don't own this repository, follow this workflow to save your progress.
 
 ### 1. Fork & Clone
 
@@ -78,7 +78,6 @@ my-repo-name/
 │   │   ├── index.js           # 📝 Your Implementation
 │   │   └── index.test.js      # 🧪 Verification Suite
 │   └── ...
-├── TRAINER_SETUP.md           # 🎓 Instructions for Repo Owners
 ├── frontend_roadmap.md        # 🗺️ Detailed Syllabus
 └── FINAL_PROJECT_SPECS.md     # 🏗️ Capstone Requirements
 ```
